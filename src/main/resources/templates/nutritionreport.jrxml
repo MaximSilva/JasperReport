@@ -24,11 +24,11 @@
                     <text><![CDATA[Nutrition Report]]></text>
                 </staticText>
                 <textField>
-                    <reportElement x="445" y="10" width="100" height="20" forecolor="#FFFFFF" uuid="b4c04ef7-f631-4a1c-80b0-22201ec21fd1"/>
+                    <reportElement x="320" y="10" width="225" height="20" forecolor="#FFFFFF" uuid="b4c04ef7-f631-4a1c-80b0-22201ec21fd1"/>
                     <textElement textAlignment="Right" markup="none">
                         <font size="12"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$P{firstName}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$P{lastName}+", "+$P{firstName}]]></textFieldExpression>
                 </textField>
                 <textField>
                     <reportElement x="445" y="30" width="100" height="20" forecolor="#FFFFFF" uuid="20ec1e9e-0224-4c91-a8b4-c15b436b3644"/>
