@@ -1,11 +1,13 @@
 package com.maxreport.nutritionreport;
 
+import com.maxreport.nutritionreport.model.MacroNutrient;
 import com.maxreport.nutritionreport.model.Nutrition;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import javax.crypto.Mac;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +43,17 @@ public class NutritionReportApplication {
         nutritionList.add(calcium);
         nutritionList.add(iron);
 
+        MacroNutrient carbMacroNutrient = new MacroNutrient("Carbohydrates", 48);
+        MacroNutrient fatMacroNutrient = new MacroNutrient("Fat", 32);
+        MacroNutrient proteinMacroNutrient = new MacroNutrient("Protein", 30);
+
+        List<MacroNutrient> macroNutrientList = new ArrayList<>();
+        macroNutrientList.add(carbMacroNutrient);
+        macroNutrientList.add(fatMacroNutrient);
+        macroNutrientList.add(proteinMacroNutrient);
+
         JRBeanCollectionDataSource nutritionDataSource = new JRBeanCollectionDataSource(nutritionList);
+        JRBeanCollectionDataSource macroNutrientDataSource = new JRBeanCollectionDataSource(macroNutrientList);
 
 
         Map<String, Object> parameters = new HashMap<>();
@@ -50,6 +62,9 @@ public class NutritionReportApplication {
         parameters.put("dob", "05/07/2002");
         parameters.put("age", 21);
         parameters.put("nutritionDataSet", nutritionDataSource);
+        parameters.put("macroNutrientDataSet", macroNutrientDataSource);
+
+
 
         JasperReport report = JasperCompileManager.compileReport(filepath);
         JasperPrint print = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
